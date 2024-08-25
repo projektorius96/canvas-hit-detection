@@ -46,11 +46,18 @@ canvas.addEventListener("mousemove", (event) => {
   const mouseX = (event.clientX - canvasBoundingRect.left) * scale.x;  /* <= essentially multiplying by `scale.x` still allows us to point in the centre, but push pointer further **right**, which is present due to Device Pixel Ratio  */ 
   const mouseY = (event.clientY - canvasBoundingRect.top) * scale.y;   /* <= essentially multiplying by `scale.y` still allows us to point in the centre, but push pointer further **bottom**, which is present due to Device Pixel Ratio */
 
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
   // Check if the mouse click is within the rectangle path
   if ( ctx.isPointInPath(rectanglePath, mouseX, mouseY) ) {
 
-    console.log("Rectangle hit!");
-    // Perform your desired action when the rectangle is clicked
+    ctx.fillStyle = "green";
+
+  } else {
+
+    ctx.fillStyle = "blue";
 
   }
+
+  ctx.fillRect(centerX - rectangleWidth / 2, centerY - rectangleHeight / 2, rectangleWidth, rectangleHeight);
 });
